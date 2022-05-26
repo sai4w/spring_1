@@ -36,11 +36,11 @@
 			 <span th:errors=${skin.dateCreation} class="text-danger"> </span> 
 		</div>
 		<div class="form-group">
-						<label class="control-label">Categorie :</label> 
-                            <select name="categorie" class="form-control">
-                                                                <option th:each="cat : ${categories}" th:if="${mode=='edit'}" th:selected="${ cat.idCat == skin.categorie.idCat}"  th:text="${cat.nomCat}"></option>    
+						<label class="control-label">Type :</label> 
+                            <select name="type" class="form-control">
+                                                                <option th:each="t : ${types}" th:if="${mode=='edit'}" th:selected="${ t.idType == skin.type.idType}"  th:text="${t.nomType}"></option>    
 
-                              <option th:each="cat : ${categories}"th:if="${mode=='new'}" th:text="${cat.nomCat}"></option>    
+                              <option th:each="t : ${types}"th:if="${mode=='new'}" th:text="${t.nomType}"></option>    
 
                             </select>
  						</div>

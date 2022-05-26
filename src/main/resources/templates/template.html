@@ -33,11 +33,11 @@ th:href="@{showCreate}">Ajouter</a>
 </li>
 <li class="nav-item dropdown">
  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
- Catégories
+ Types
  </a>
  <div class="dropdown-menu">
- <a  class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{CreateCategorie}">Ajouter categorie</a>
- <a class="dropdown-item" th:href="@{ListeCategories}">Lister categories</a>
+ <a  class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{createType}">Ajouter Type</a>
+ <a class="dropdown-item" th:href="@{listeTypes}">Lister Types</a>
  </div>
  </li>
 </ul>

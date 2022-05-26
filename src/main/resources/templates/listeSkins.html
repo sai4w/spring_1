@@ -15,12 +15,12 @@
 		<div class="card">
 			<div class="card-header">Liste des Skins</div>
 			<div class="card-body">
-		<form th:action="@{chercherCat}" method="get">
+		<form th:action="@{chercherType}" method="get">
 			<div class="mb-3">
 		 		<div class="from-group">
-		 			<label class="control-label">Categorie</label>
- 					<select name="idCat" class="form-control" style="width:400px;">
-  						<option th:each="c:${categories}"  th:value="${c.idCat}" th:text="${c.nomCat}"></option>
+		 			<label class="control-label">Type</label>
+ 					<select name="idType" class="form-control" style="width:400px;">
+  						<option th:each="c:${types}"  th:value="${c.idType}" th:text="${c.nomType}"></option>
 					</select>
 		 		</div>
 				<input type="submit" class="btn btn-primary" value="Chercher"> 
@@ -42,7 +42,7 @@
 						
 						<th>Prix</th>
 						<th>Date de creation</th>
-						<th>Categories</th>
+						<th>Types</th>
 						<th>Suppression</th>
 						<th>Modification</th>
 					</tr>
@@ -52,7 +52,7 @@
 						 
 						<td th:text="${p.prixSkin}"></td> 
 						<td th:text="${p.dateCreation}"></td>
-						<td th:text="${p.categorie.nomCat}"></td> 
+						<td th:text="${p.type.nomType}"></td> 
 						<td sec:authorize="hasRole('ADMIN')" ><a class="btn btn-danger"
 onclick="return confirm('Etes-vous sûr ?')"
 th:href="@{supprimerSkin(id=${p.idSkin},

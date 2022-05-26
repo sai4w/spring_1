@@ -24,7 +24,7 @@ public interface SkinRepository extends JpaRepository<Skin, Long> {
 	 @Query("select p from Skin p order by p.nomSkin ASC, p.prixSkin DESC")
 	 List<Skin> trierSkinsNomsPrix ();
 	 @Query("select p from Skin p  where p.nomSkin like 'PC'")
-	 List<Skin> findByNomSkin(@Param("nomProd") String nom);	
-	 @Query("select p from Skin p where p.type.nomtype like ?1")
+	 List<Skin> findByNomSkin(@Param("nomSkin") String nom);	
+	 @Query("select p from Skin p where p.type.nomType like ?1")
 	 List<Skin> findByNomTypeContains(String nom);
 }

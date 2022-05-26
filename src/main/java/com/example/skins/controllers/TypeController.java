@@ -42,10 +42,10 @@ public class TypeController {
 	    public String saveType(Type type)
 	    {
 	    typeService.saveType(type);
-		return "redirect:/ListeTypes";
+		return "redirect:/listeTypes";
 	    }
 	 
-	 @RequestMapping("/ListeTypes")
+	 @RequestMapping("/listeTypes")
 	    public String listeTypes(ModelMap modelMap,
 	    		@RequestParam (name="page",defaultValue = "0") int page,
 	    		@RequestParam (name="size", defaultValue = "2") int size)
@@ -91,20 +91,6 @@ public class TypeController {
 	        modelMap.addAttribute("types", types);
 	        return "listeTypes";
 	    }
-	 @RequestMapping("/chercherType")
-	
-	    public String chercherType(@RequestParam("nomType") String nom,
-	    		ModelMap modelMap)
-	    
-	    
-	    {      
-		 
-		 		System.out.println(nom);
-	    	  List <Skin> skins = skinService.findByNomTypeContains(nom);
-	    	  modelMap.addAttribute("typess",skins);
-	    	  
-	    	  return "chercherType";
-	    } 
-
+	 
 
 }
