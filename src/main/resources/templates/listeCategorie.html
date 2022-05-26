@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template" xmlns:sec=https://www.thymeleaf.org/thymeleaf-extras-springsecurity5>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<head>
+	<meta charset="utf-8">
+	<title>Liste des Categories</title>
+</head>
+
+<body>
+	<div layout:fragment="Mycontent">
+		<div class="container mt-5">
+			<div class="card">
+				<div class="card-header">
+					Liste des Catégories
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<tr>
+							<th>ID</th>
+							<th>Nom Categorie</th>
+							<th>Description categorie</th>
+							<th sec:authorize="hasRole('admin')">Supprimer</th>
+							<th sec:authorize="hasRole('admin')">Modifier</th>
+						</tr>
+						<tr th:each="p:${categories.content}">
+							<td th:text="${p.idCat}"></td>
+							<td th:text="${p.nomCat}"></td>
+							<td th:text="${p.descriptionCat}"></td>
+							<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"
+									onclick="return confirm('Etes-vous sûr ?')"
+									th:href="@{supprimerCategorie(id=${p.idCat}, page=${currentPage},size=${size})}">Supprimer</a>
+							</td>
+							<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-success"
+									th:href="@{modifierCategorie(id=${p.idCat})}">Editer</a></td>
+						</tr>
+					</table>
+
+					<ul class="nav nav-pills">
+						<li th:each="page,status:${pages}">
+							<a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+								th:href="@{ ListeCategories(page=${status.index}, size=${size} ) }"
+								th:text="${status.index }"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

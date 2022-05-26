@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">
+      
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Liste des Skins</title>
+</head>
+<body>
+   <div layout:fragment="Mycontent">
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header">Liste des Skins</div>
+			<div class="card-body">
+		<form th:action="@{chercherCat}" method="get">
+			<div class="mb-3">
+		 		<div class="from-group">
+		 			<label class="control-label">Categorie</label>
+ 					<select name="idCat" class="form-control" style="width:400px;">
+  						<option th:each="c:${categories}"  th:value="${c.idCat}" th:text="${c.nomCat}"></option>
+					</select>
+		 		</div>
+				<input type="submit" class="btn btn-primary" value="Chercher"> 
+			</div>
+ 		</form>
+ 		<form th:action="@{chercherNom}" method="get">
+			<div class="mb-3">
+		 		<div class="from-group">
+					<input type="text" name="nomSkin">
+		 		</div>
+				<input type="submit" class="btn btn-primary" value="Chercher"> 
+			</div>
+ 		</form>
+ 
+				<table class="table">
+					<tr>
+						<th>ID</th>
+						<th>Nom Skin</th>
+						
+						<th>Prix</th>
+						<th>Date de creation</th>
+						<th>Categories</th>
+						<th>Suppression</th>
+						<th>Modification</th>
+					</tr>
+					<tr th:each="p:${skins}">
+						<td th:text="${p.idSkin}"></td>
+						<td th:text="${p.nomSkin}"></td>
+						 
+						<td th:text="${p.prixSkin}"></td> 
+						<td th:text="${p.dateCreation}"></td>
+						<td th:text="${p.categorie.nomCat}"></td> 
+						<td sec:authorize="hasRole('ADMIN')" ><a class="btn btn-danger"
+onclick="return confirm('Etes-vous sûr ?')"
+th:href="@{supprimerSkin(id=${p.idSkin},
+page=${currentPage},size=${size})}">Supprimer</a>
+</td>
+<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-success"
+th:href="@{modifierSkin(id=${p.idSkin})}">Editer</a></td>
+</tr>
+				</table>
+				<ul class="nav nav-pills">
+					<li th:each="page,status:${pages}"><a
+						th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+						th:href="@{ ListeSkins(page=${status.index}, size=${size} ) }"
+						th:text="${status.index }"></a></li>
+				</ul>
+			</div>
+		</div>
+	 </div>
+	</div>
+</body>
+</html>

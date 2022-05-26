@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">     
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Ajout des Skins</title>
+</head>
+<body>
+ <div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+  <div class="card-header">
+   Modifier des Skins
+  </div>
+  	<div class="card-body">
+	<form th:action="@{saveSkin}" method="post">
+		<div class="form-group">
+			<label class="control-label" hidden>ID Skin :</label> 
+		       <input type="hidden" name="idSkin" class="form-control" th:value="${skin.idSkin}"  />
+		</div>					
+		<div class="form-group">
+			<label class="control-label">Nom Skin :</label> 
+			 <input type="text" name="nomSkin" class="form-control" th:value="${skin.nomSkin}"  />
+			<span th:errors= ${skin.nomSkin} class="text-danger"> </span>	 
+		</div>
+		<div class="form-group">
+			<label class="control-label">Prix Skin :</label> 
+		    <input type="text" name="prixSkin" class="form-control" th:value="${skin.prixSkin}" />
+		    <span th:errors=${skin.prixSkin} class="text-danger"> </span> 
+		</div>
+		<div class="form-group">
+			<label class="control-label">date création :</label> 
+			<input type="date" name="dateCreation" class="form-control"  th:value="${skin.dateCreation}"/>
+			 <span th:errors=${skin.dateCreation} class="text-danger"> </span> 
+		</div>
+		<div class="form-group">
+						<label class="control-label">Categorie :</label> 
+                            <select name="categorie" class="form-control">
+                                                                <option th:each="cat : ${categories}" th:if="${mode=='edit'}" th:selected="${ cat.idCat == skin.categorie.idCat}"  th:text="${cat.nomCat}"></option>    
+
+                              <option th:each="cat : ${categories}"th:if="${mode=='new'}" th:text="${cat.nomCat}"></option>    
+
+                            </select>
+ 						</div>
+		<div>
+		<button type="submit" class="btn btn-primary">Valider</button>
+		</div>
+		</form>
+		</div>
+		</div>
+</div>
+</div>
+</body>
+</html>
